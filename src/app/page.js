@@ -57,7 +57,7 @@ export default function Home() {
           <h1 className="text-4xl md:text-6xl font-extrabold mb-2 text-white">
             Hello, I'm <br />
             <span className="bg-gradient-to-r from-gray-500 to-gray-200 text-transparent bg-clip-text">
-              Aqil Mustaqim
+              [Your Name]
             </span>
           </h1>
 
@@ -104,14 +104,17 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Bahagian Kanan: Imej Profil dengan Bentuk Unik */}
+        {/* Bahagian Kanan: Imej Profil dengan Kesan Kaca dan Cahaya */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="md:w-1/2 mt-12 md:mt-0 flex justify-center items-center"
+          className="relative md:w-1/2 mt-12 md:mt-0 flex justify-center items-center"
         >
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
+          {/* Efek Cahaya Latar */}
+          <div className="absolute inset-0 bg-blue-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
             <div
               className="absolute inset-0 bg-gray-800"
               style={{
@@ -124,7 +127,7 @@ export default function Home() {
                 alt="My Photo"
                 layout="fill"
                 objectFit="cover"
-                className="transition-all duration-300 transform hover:scale-105"
+                className="transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-xl hover:ring-2 hover:ring-gray-600"
               />
             </div>
           </div>
@@ -150,7 +153,7 @@ export default function Home() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center justify-center p-6 bg-[#1a1a1a] rounded-xl shadow-lg text-center transition-colors duration-300 transform hover:-translate-y-2"
+              className="flex flex-col items-center justify-center p-6 bg-white/5 backdrop-blur-sm rounded-xl shadow-lg text-center transition-colors duration-300 transform hover:-translate-y-2"
             >
               <Image
                 src={skill.icon}
@@ -187,7 +190,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               viewport={{ once: true }}
               whileHover={{ y: -10, scale: 1.05 }}
-              className="group relative overflow-hidden rounded-xl shadow-lg bg-[#1a1a1a]"
+              className="group relative overflow-hidden rounded-xl shadow-lg bg-white/5 backdrop-blur-sm"
             >
               <Image
                 src={project.image}
