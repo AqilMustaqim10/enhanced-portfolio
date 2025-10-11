@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react"; // Import ikon moden dari lucide
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +12,7 @@ export default function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  // Varian animasi dikekalkan
   const menuVariants = {
     initial: {
       scaleY: 0,
@@ -56,13 +58,18 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full z-20 top-0 left-0 bg-transparent py-4 backdrop-blur-sm">
+    <nav
+      // Ubah latar belakang: transparent dengan blur, tetapi teks kini lebih gelap
+      // bg-white/70 untuk latar belakang putih transparent
+      className="fixed w-full z-20 top-0 left-0 bg-white/70 py-4 backdrop-blur-sm shadow-sm"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link
               href="/"
-              className="text-2xl font-bold text-gray-200 hover:text-white transition-colors"
+              // Warna logo: text-gray-800, hover:text-black
+              className="text-2xl font-bold text-gray-800 hover:text-black transition-colors"
             >
               AqilMustaqim
             </Link>
@@ -73,7 +80,8 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-gray-400 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  // Warna link desktop: text-gray-600, hover:text-gray-900
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -83,41 +91,17 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              // Warna butang mobile: text-gray-800, hover:text-black, focus:ring-gray-900
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
+              {/* Menggantikan SVG dengan ikon Lucide untuk estetika moden */}
               {!isOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-16 6h16"
-                  />
-                </svg>
+                <Menu className="block h-6 w-6" /> // Ikon Menu
               ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <X className="block h-6 w-6" /> // Ikon Tutup
               )}
             </button>
           </div>
@@ -126,7 +110,9 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden origin-top absolute top-0 left-0 w-full h-screen bg-gray-950/95 pt-20"
+            // Latar belakang menu mobile: bg-gray-950/95 ditukar kepada bg-gray-900 (tema gelap untuk menu)
+            // Latar belakang gelap pada menu mobile masih estetik walaupun tema utama cerah
+            className="md:hidden origin-top absolute top-0 left-0 w-full h-screen bg-gray-900/95 pt-20"
             variants={menuVariants}
             initial="initial"
             animate="animate"
@@ -139,6 +125,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={() => setIsOpen(false)}
+                      // Warna link mobile: text-white dikekalkan (kontras pada latar belakang gelap)
                       className="block text-4xl font-bold text-white hover:text-gray-400 transition-colors"
                     >
                       {link.name}
