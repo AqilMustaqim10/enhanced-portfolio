@@ -1,21 +1,47 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MapPin, Phone, Send } from "lucide-react"; // Ikon moden
+import { Mail, MapPin, Phone, Send, Loader2 } from "lucide-react";
+// PENTING: useActionState diimport dari 'react'
+import { useActionState, useState, startTransition } from "react";
+// PERUBAHAN: useFormStatus diimport dari 'react-dom' untuk kestabilan
+import { useFormStatus } from "react-dom";
+import { sendContactEmail } from "./action";
+
+// --- Komponen Pembantu untuk Butang Hantar ---
+// Menggunakan useFormStatus untuk menunjukkan status Loading
+function SubmitButton() {
+  // useFormStatus membaca status pending borang ibu bapa
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full md:w-auto px-8 py-3 bg-gray-900 text-white font-semibold rounded-lg shadow-lg hover:bg-black transition-colors flex items-center justify-center gap-2 disabled:bg-gray-500 disabled:cursor-not-allowed"
+    >
+      {pending ? (
+        <>
+          <Loader2 size={20} className="animate-spin" />
+          Sending...
+        </>
+      ) : (
+        <>
+          <Send size={20} />
+          Send Message
+        </>
+      )}
+    </button>
+  );
+}
 
 // Data Kontak
 const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "your.email@example.com",
-    link: "mailto:your.email@example.com",
-  },
-  {
-    icon: Phone,
-    title: "Phone",
-    value: "+60 12-345 6789",
-    link: "tel:+60123456789",
+    value: "aaqilmustaqim16@gmail.com",
+    link: "mailto:aaqilmustaqim16@gmail.com",
   },
   {
     icon: MapPin,
@@ -26,8 +52,27 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
+  const initialResult = { success: null, message: null };
+  // Menggunakan useActionState
+  const [state, formAction] = useActionState(sendContactEmail, initialResult);
+
+  const [key, setKey] = useState(0);
+
+  // Logic untuk reset borang selepas berjaya dihantar
+  if (state.success === true && key === 0) {
+    // Reset borang dengan mengubah key
+    setKey((prevKey) => prevKey + 1);
+    // Set semula status mesej selepas 5 saat
+    setTimeout(() => {
+      // Pembetulan: Balut panggilan formAction dalam startTransition
+      startTransition(() => {
+        formAction(initialResult);
+        setKey(0); // Reset key kembali untuk membolehkan penghantaran seterusnya
+      });
+    }, 5000);
+  }
+
   return (
-    // Container utama dengan padding dan latar belakang putih
     <div className="min-h-screen bg-white text-gray-900 pt-32 pb-20 px-4 md:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -87,7 +132,9 @@ export default function ContactPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
               Send a Message
             </h2>
-            <form className="space-y-6">
+
+            {/* Borang dengan key={key} untuk reset borang */}
+            <form key={key} action={formAction} className="space-y-6">
               {/* Input Nama Penuh */}
               <div>
                 <label
@@ -99,6 +146,7 @@ export default function ContactPage() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   required
                   placeholder="e.g., Aqil Mustaqim"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-black focus:border-black transition-all outline-none bg-white text-gray-900"
@@ -116,6 +164,7 @@ export default function ContactPage() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   required
                   placeholder="your.email@domain.com"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-black focus:border-black transition-all outline-none bg-white text-gray-900"
@@ -133,6 +182,7 @@ export default function ContactPage() {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   placeholder="Project Inquiry / Job Offer"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-black focus:border-black transition-all outline-none bg-white text-gray-900"
                 />
@@ -149,20 +199,28 @@ export default function ContactPage() {
                 <textarea
                   id="message"
                   rows="5"
+                  name="message"
                   required
                   placeholder="Tell me more about your project or inquiry..."
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-1 focus:ring-black focus:border-black transition-all outline-none bg-white text-gray-900"
                 ></textarea>
               </div>
 
+              {/* Slot untuk Maklum Balas Mesej */}
+              {state.message && (
+                <div
+                  className={`p-4 rounded-lg text-sm font-medium ${
+                    state.success
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {state.message}
+                </div>
+              )}
+
               {/* Butang Hantar */}
-              <button
-                type="submit"
-                className="w-full md:w-auto px-8 py-3 bg-gray-900 text-white font-semibold rounded-lg shadow-lg hover:bg-black transition-colors flex items-center justify-center gap-2"
-              >
-                <Send size={20} />
-                Send Message
-              </button>
+              <SubmitButton />
             </form>
           </motion.div>
         </div>
