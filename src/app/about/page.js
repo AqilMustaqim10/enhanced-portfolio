@@ -18,10 +18,10 @@ import {
 
 const personalBio = {
   name: "Aqil Mustaqim",
-  title: "Pembangun Perisian | Inovator Web Moden",
+  title: "Web Developer | Quality Assurance Enthusiast | Business Analyst",
   location: "Kuala Lumpur, Malaysia",
   introduction:
-    "Saya seorang pembangun perisian yang bersemangat dengan fokus yang mendalam dalam mencipta pengalaman pengguna yang lancar dan antara muka yang berprestasi tinggi. Berpegang kepada prinsip kod yang bersih dan seni bina yang mampan, saya sentiasa berusaha untuk merapatkan jurang antara reka bentuk dan fungsi. Saya percaya pada automasi dan membina penyelesaian yang berorientasikan masa depan.",
+    "I am a final-year Business Computing student with a strong interest in Quality Assurance, Business Analysis, and Web Development. I enjoy exploring how technology can improve business processes while ensuring software quality and user satisfaction. With a solid foundation in both business and technical skills, including database management, programming, and UI design, I aim to build a career that bridges analytical problem-solving with creative digital solutions.",
   // Laluan lokal di sini. Sila letakkan fail gambar anda (contoh: aqil-profile.jpg)
   // di dalam folder 'public/images/' projek anda.
   imageUrl: "/images/profile.jpg",
@@ -32,7 +32,7 @@ const expertise = [
     icon: Code,
     title: "Frontend Development",
     description:
-      "Mahir dalam React, Next.js, dan membina antaramuka responsif menggunakan Tailwind CSS.",
+      "Proficient in HTML, CSS, JavaScript, and building responsive, user-friendly interfaces. Experienced with frameworks such as React and Next.js for creating modern web experiences.",
     color: "text-blue-600",
     delay: 0.1,
   },
@@ -40,23 +40,23 @@ const expertise = [
     icon: Database,
     title: "Backend & API",
     description:
-      "Pengalaman dengan Node.js, Express, dan menguruskan data dengan PostgreSQL/MongoDB/Firestore.",
+      "Skilled in PHP, MySQL, and basic API integration. Understands how to structure data efficiently and maintain seamless system communication between frontend and backend.",
     color: "text-green-600",
     delay: 0.2,
   },
   {
     icon: Zap,
-    title: "Performance Optimization",
+    title: "Quality Assurance & Testing",
     description:
-      "Fokus untuk menyampaikan laman web dengan kelajuan muatan yang sangat pantas dan skor Lighthouse yang tinggi.",
+      "Detail-oriented in identifying software issues, performing test cases, and ensuring system reliability and functionality through structured validation.",
     color: "text-yellow-600",
     delay: 0.3,
   },
   {
     icon: Cpu,
-    title: "Problem Solving",
+    title: "Business & Analytical Thinking",
     description:
-      "Cekap dalam menterjemahkan keperluan perniagaan yang kompleks kepada penyelesaian kod yang elegan dan praktikal.",
+      "Adept at translating business requirements into clear technical tasks, bridging the gap between users and developers to deliver practical, value-driven solutions.",
     color: "text-red-600",
     delay: 0.4,
   },
@@ -65,26 +65,25 @@ const expertise = [
 const philosophy = [
   {
     icon: Lightbulb,
-    title: "Inovasi",
+    title: "Innovation",
     detail:
-      "Sentiasa mencari cara baharu dan lebih baik untuk menyelesaikan masalah teknologi.",
+      "Constantly exploring new and better ways to solve technological challenges with creativity and efficiency.",
   },
   {
     icon: TrendingUp,
-    title: "Pembelajaran Berterusan",
+    title: "Continuous Learning",
     detail:
-      "Mengikuti perkembangan terkini dalam ekosistem JavaScript dan cloud computing.",
+      "Committed to staying up to date with the latest trends in software development, quality assurance, and digital innovation.",
   },
   {
     icon: Coffee,
-    title: "Kolaborasi Kuat",
+    title: "Strong Collaboration",
     detail:
-      "Berjaya melalui komunikasi yang terbuka dan kerja berpasukan yang utuh.",
+      "Thrive in open communication and teamwork, believing that the best results come from shared ideas and mutual support.",
   },
 ];
 
 // --- Komponen Pembantu untuk Animasi Gulir (Scroll Animation) ---
-// Ini membalut elemen untuk mencetuskan animasi apabila ia memasuki viewport.
 const ScrollFadeIn = ({ children, delay = 0, yOffset = 50 }) => {
   const ref = useRef(null);
   return (
@@ -101,25 +100,12 @@ const ScrollFadeIn = ({ children, delay = 0, yOffset = 50 }) => {
 };
 
 // --- Komponen Utama ---
-// Varian asas dikekalkan untuk animasi bebanan awal (initial load animation)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
     },
   },
 };
@@ -137,14 +123,15 @@ export default function AboutPage() {
         <ScrollFadeIn delay={0.1} yOffset={40}>
           <header className="text-center space-y-4">
             <p className="text-lg uppercase tracking-[0.3em] text-gray-500 font-medium">
-              Jom Kenali Saya
+              Get to Know Me
             </p>
             <h1 className="text-7xl md:text-8xl font-extrabold leading-tight">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-500 to-black">
                 {personalBio.name}
               </span>
             </h1>
-            <p className="2xl text-gray-600 max-w-4xl mx-auto">
+            {/* Jarak dipertingkatkan di sini dengan mt-4 dan menggunakan text-2xl yang betul */}
+            <p className="text-2xl text-gray-600 max-w-4xl mx-auto mt-4">
               {personalBio.title}
             </p>
           </header>
@@ -178,16 +165,16 @@ export default function AboutPage() {
               {/* Bio dan Ringkasan */}
               <div className="lg:col-span-2 space-y-8">
                 <h2 className="text-4xl font-bold text-gray-900 border-b border-indigo-500/30 pb-3">
-                  Cerita di Sebalik Kod
+                  Professional Summary
                 </h2>
-                <p className="text-xl text-gray-700 leading-relaxed">
+                <p className="text-xl text-gray-700 leading-relaxed text-justify">
                   {personalBio.introduction}
                 </p>
 
                 {/* START EDIT: Lokasi diletakkan di atas butang portfolio */}
                 <div className="flex items-center space-x-3 text-gray-700 font-medium pt-4">
-                  <MapPin className="w-6 h-6 text-black-600 flex-shrink-0" />
-                  <span>Berasaskan di **{personalBio.location}**</span>
+                  <MapPin className="w-6 h-6 text-indigo-600 flex-shrink-0" />
+                  <span>Based in {personalBio.location}</span>
                 </div>
                 <motion.a
                   href="#contact"
@@ -209,10 +196,10 @@ export default function AboutPage() {
         {/* --- Bahagian Kepakaran Teras (Grid) --- */}
         <div className="text-center space-y-4">
           <h2 className="text-5xl font-extrabold text-gray-900">
-            Kepakaran Teras
+            Core Expertise
           </h2>
           <p className="text-xl text-gray-600">
-            Alat dan kemahiran yang saya bawa untuk setiap projek moden.
+            The tools and skills I bring to every modern project.
           </p>
         </div>
 
@@ -239,10 +226,10 @@ export default function AboutPage() {
         {/* --- Bahagian Falsafah (Senarai/Row) --- */}
         <div className="text-center space-y-4 pt-10">
           <h2 className="text-5xl font-extrabold text-gray-900">
-            Falsafah Bekerja
+            Work Philosophy
           </h2>
           <p className="text-xl text-gray-600">
-            Prinsip yang membimbing proses pembangunan saya.
+            The principles that guide my approach to development.
           </p>
         </div>
 
@@ -250,14 +237,14 @@ export default function AboutPage() {
           {philosophy.map((item, index) => (
             <motion.div
               key={index}
-              className="flex-1 p-6 space-y-3 text-center border-l-4 border-black bg-white rounded-lg shadow-inner"
+              className="flex-1 p-6 space-y-3 text-center border-l-4 border-indigo-600/70 bg-white rounded-lg shadow-inner"
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }} // Animasi dicetuskan apabila dalam pandangan
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
             >
               <div className="flex justify-center mb-3">
-                <item.icon className="w-8 h-8 text-black-600" />
+                <item.icon className="w-8 h-8 text-indigo-600" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900">
                 {item.title}
