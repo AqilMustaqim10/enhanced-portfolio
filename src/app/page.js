@@ -10,23 +10,25 @@ const skills = [
   { name: "HTML", level: "Advanced", icon: "/icons/html.png" },
   { name: "CSS", level: "Advanced", icon: "/icons/css-3.png" },
   { name: "JavaScript", level: "Intermediate", icon: "/icons/js.png" },
-  { name: "React", level: "Intermediate", icon: "/icons/react.svg" },
-  { name: "Next.js", level: "Beginner", icon: "/icons/nextjs.svg" },
-  { name: "Tailwind CSS", level: "Advanced", icon: "/icons/tailwind.svg" },
+  { name: "React", level: "Beginner", icon: "/icons/react.png" },
+  { name: "Next.js", level: "Beginner", icon: "/icons/nextjs.png" },
+  { name: "Supabase", level: "Beginner", icon: "/icons/supabase.png" },
 ];
 
 // Data projek contoh (anda perlu ganti dengan projek anda)
 const featuredProjects = [
   {
-    title: "E-Commerce Store",
-    description: "A full-stack e-commerce platform with Stripe integration.",
+    title: "StocktakeEase-POS",
+    description:
+      "A web-based Point of Sale and inventory management system developed using HTML, CSS, JavaScript, PHP, and MySQL",
     image: "/images/project1.jpg",
     link: "/projects/ecommerce",
   },
   {
-    title: "Social Media Dashboard",
-    description: "An analytics dashboard to track social media performance.",
-    image: "/images/project2.jpg",
+    title: "Todo App",
+    description:
+      " A full-stack todo app with React, Supabase PostgreSQL, Google OAuth authentication and real-time synchronization",
+    image: "/images/todo.png",
     link: "/projects/social-dashboard",
   },
   {
@@ -100,13 +102,13 @@ export default function Home() {
 
           <TypeAnimation
             sequence={[
-              "UI/UX Developer",
+              "Web Enthusiast",
               2000,
-              "Data Analyst",
+              "Quality Assurance",
+              2000,
+              "Business Analyst",
               2000,
               "Full-Stack Developer",
-              2000,
-              "Web Enthusiast",
               2000,
             ]}
             wrapper="span"
@@ -197,7 +199,7 @@ export default function Home() {
           My Creations
         </motion.h2>
         <p className="text-center text-lg text-gray-500 mb-12">
-          A selection of my best work and case studies.
+          A selection of my best work.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.map((project, index) => (
@@ -228,7 +230,7 @@ export default function Home() {
                   {project.description}
                 </p>
                 <span className="flex items-center text-sm font-medium text-gray-700 group-hover:text-black transition-colors">
-                  View Case Study <ArrowRight size={16} className="ml-2" />
+                  View Projects <ArrowRight size={16} className="ml-2" />
                 </span>
               </div>
             </motion.a>
