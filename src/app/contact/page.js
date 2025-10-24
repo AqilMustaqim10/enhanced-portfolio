@@ -99,7 +99,7 @@ export default function ContactPage() {
             Get In Touch
           </p>
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900">
-            Let's Talk
+            Let&apos;s Talk
           </h1>
           <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
             Have a project idea or just want to chat? Send me a message!
