@@ -1,9 +1,74 @@
 "use client";
 
-import Image from "next/image";
+import React from "react";
+// Pustaka 'react-type-animation' telah dialih keluar kerana ralat kompilasi.
 import { motion } from "framer-motion";
-import { TypeAnimation } from "react-type-animation";
 import { ArrowRight, FileText, Briefcase, Code } from "lucide-react";
+
+// Komponen Tersuai untuk Efek Menaip (Menggantikan TypeAnimation)
+// Komponen ini menyediakan fungsi yang sama tanpa memerlukan pustaka luaran.
+const TypeAnimationComponent = ({ sequence, speed, className }) => {
+  // Hanya ambil string dari array sequence (indeks genap), abaikan delay
+  const words = sequence.filter((_, i) => i % 2 === 0);
+
+  const [text, setText] = React.useState("");
+  const [wordIndex, setWordIndex] = React.useState(0);
+  const [charIndex, setCharIndex] = React.useState(0);
+  const [isDeleting, setIsDeleting] = React.useState(false);
+
+  // Tetapan kelajuan
+  const typingSpeed = 50; // ms
+  const deletingSpeed = 30; // ms
+  const pauseTime = 1500; // Jeda 1.5 saat selepas menaip penuh
+
+  React.useEffect(() => {
+    if (words.length === 0) return;
+
+    const currentWord = words[wordIndex];
+    let timeout;
+
+    if (isDeleting) {
+      // Fasa 1: Memadam
+      if (charIndex > 0) {
+        timeout = setTimeout(() => {
+          setText(currentWord.substring(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        }, deletingSpeed);
+      } else {
+        // Selesai padam, tukar ke perkataan seterusnya
+        setIsDeleting(false);
+        setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+      }
+    } else {
+      // Fasa 2: Menaip
+      if (charIndex < currentWord.length) {
+        timeout = setTimeout(() => {
+          setText(currentWord.substring(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        }, typingSpeed);
+      } else {
+        // Selesai menaip, tunggu seketika, kemudian padam
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseTime);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, wordIndex, words]);
+
+  // Mengembalikan teks dengan kursor berkedip (blinking cursor)
+  return (
+    <span className={className}>
+      {text}
+      {/* Kursor berkedip */}
+      <span
+        className="inline-block w-1 h-6 bg-gray-600 animate-pulse ml-1 align-middle"
+        style={{ minHeight: "1.5rem", marginTop: "-3px" }}
+      ></span>
+    </span>
+  );
+};
 
 // Data kemahiran anda (boleh ubah atau tambah)
 const skills = [
@@ -27,7 +92,7 @@ const featuredProjects = [
   {
     title: "Todo App",
     description:
-      " A full-stack todo app with React, Supabase PostgreSQL, Google OAuth authentication and real-time synchronization",
+      "A full-stack todo app with React, Supabase PostgreSQL, Google OAuth authentication and real-time synchronization",
     image: "/images/todo.png",
     link: "/projects/social-dashboard",
   },
@@ -40,6 +105,10 @@ const featuredProjects = [
   },
 ];
 
+// Fallback image source function
+const getFallbackImage = (size = "300x300", text = "Placeholder") =>
+  `https://placehold.co/${size}/CCCCCC/333333?text=${encodeURIComponent(text)}`;
+
 export default function Home() {
   return (
     // Latar belakang putih dan teks hitam yang tajam
@@ -51,7 +120,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
         className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl mx-auto pt-32 pb-20 min-h-[80vh] gap-12" // Padding Hero yang lebih tinggi
       >
-        {/* Bahagian Kiri: Imej Profil Estetik BARU */}
+        {/* Bahagian Kiri: Imej Profil Estetik BARU (Menggunakan <img>) */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -66,12 +135,17 @@ export default function Home() {
               clipPath: "polygon(0% 0%, 100% 10%, 100% 100%, 0% 90%)",
             }}
           >
-            <Image
+            {/* Menggantikan Next/Image dengan <img> standard */}
+            <img
               src="/images/profile.jpg"
               alt="My Photo"
-              layout="fill"
-              objectFit="cover"
+              // Menggunakan gaya CSS untuk mencapai kesan 'layout="fill"' dan 'objectFit="cover"'
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
               className="transition-all duration-500 transform group-hover:scale-105"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = getFallbackImage("400x400", "Aqil");
+              }}
             />
           </div>
           {/* Border halus di luar bentuk condong (hanya untuk visual) */}
@@ -83,7 +157,7 @@ export default function Home() {
           ></div>
         </motion.div>
 
-        {/* Bahagian Kanan: Teks Perkenalan Minimalis (TIADA PERUBAHAN) */}
+        {/* Bahagian Kanan: Teks Perkenalan Minimalis */}
         <motion.div
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -94,13 +168,14 @@ export default function Home() {
             Introduce
           </p>
           <h1 className="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
-            Hello, I'm{" "}
-            <span className="bg-gradient-to-r from-gray-700 to-black text-transparent bg-clip-text  whitespace-nowrap">
+            Hello, I&apos;m{" "}
+            <span className="bg-gradient-to-r from-gray-700 to-black text-transparent bg-clip-text whitespace-nowrap">
               Aqil Mustaqim
             </span>
           </h1>
 
-          <TypeAnimation
+          {/* Menggunakan komponen buatan sendiri TypeAnimationComponent */}
+          <TypeAnimationComponent
             sequence={[
               "Web Enthusiast",
               2000,
@@ -151,7 +226,7 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* Section: Skills (TIADA PERUBAHAN) */}
+      {/* Section: Skills */}
       <section className="w-full max-w-6xl py-20 px-4 md:px-0 border-t border-gray-100">
         <motion.h2
           initial={{ y: -20, opacity: 0 }}
@@ -176,11 +251,17 @@ export default function Home() {
               className="flex flex-col items-center justify-center p-4 bg-white border border-gray-200 rounded-xl shadow-sm text-center transition-all duration-300 transform hover:shadow-lg hover:border-gray-300"
             >
               <div className="p-3 mb-2 bg-gray-100 rounded-full">
-                <Image
+                {/* Menggantikan Next/Image dengan <img> standard */}
+                <img
                   src={skill.icon}
                   alt={skill.name}
                   width={30}
                   height={30}
+                  className="w-[30px] h-[30px]" // Pastikan saiz dikekalkan
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = getFallbackImage("30x30", "S");
+                  }}
                 />
               </div>
               <h3 className="text-base font-semibold text-gray-800">
@@ -192,7 +273,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section: Featured Projects (TIADA PERUBAHAN) */}
+      {/* Section: Featured Projects */}
       <section className="w-full max-w-6xl py-20 px-4 md:px-0 border-t border-gray-100">
         <motion.h2
           initial={{ y: -20, opacity: 0 }}
@@ -219,12 +300,17 @@ export default function Home() {
               className="group relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-200 block"
             >
               <div className="aspect-video relative overflow-hidden">
-                <Image
+                {/* Menggantikan Next/Image dengan <img> standard */}
+                <img
                   src={project.image}
                   alt={project.title}
-                  layout="fill"
-                  objectFit="cover"
+                  // Menggunakan gaya CSS untuk mencapai kesan 'layout="fill"' dan 'objectFit="cover"'
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   className="transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = getFallbackImage("600x400", project.title);
+                  }}
                 />
               </div>
               <div className="p-6">

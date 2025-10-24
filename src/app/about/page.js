@@ -100,16 +100,6 @@ const ScrollFadeIn = ({ children, delay = 0, yOffset = 50 }) => {
 };
 
 // --- Komponen Utama ---
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 export default function AboutPage() {
   return (
     <motion.div
@@ -171,7 +161,7 @@ export default function AboutPage() {
                   {personalBio.introduction}
                 </p>
 
-                {/* START EDIT: Lokasi diletakkan di atas butang portfolio */}
+                {/* Lokasi dan Butang Portfolio */}
                 <div className="flex items-center space-x-3 text-gray-700 font-medium pt-4">
                   <MapPin className="w-6 h-6 text-indigo-600 flex-shrink-0" />
                   <span>Based in {personalBio.location}</span>
@@ -187,7 +177,6 @@ export default function AboutPage() {
                   <Briefcase size={20} />
                   See My Projects
                 </motion.a>
-                {/* END EDIT */}
               </div>
             </div>
           </ScrollFadeIn>

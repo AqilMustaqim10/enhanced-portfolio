@@ -1,19 +1,14 @@
 "use client";
 
+import React, { useState, useEffect } from "react"; // Menggunakan useState dan useEffect standard
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send, Loader2 } from "lucide-react";
-// PENTING: useActionState diimport dari 'react'
-import { useActionState, useState, startTransition } from "react";
-// PERUBAHAN: useFormStatus diimport dari 'react-dom' untuk kestabilan
-import { useFormStatus } from "react-dom";
+// Import fungsi action dari fail luaran
 import { sendContactEmail } from "./action";
 
 // --- Komponen Pembantu untuk Butang Hantar ---
-// Menggunakan useFormStatus untuk menunjukkan status Loading
-function SubmitButton() {
-  // useFormStatus membaca status pending borang ibu bapa
-  const { pending } = useFormStatus();
-
+// useFormStatus DIBUANG. Kini menerima status 'pending' sebagai prop.
+function SubmitButton({ pending }) {
   return (
     <button
       type="submit"
@@ -40,8 +35,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "aaqilmustaqim16@gmail.com",
-    link: "mailto:aaqilmustaqim16@gmail.com",
+    value: "aaqilmutaqim16@gmail.com",
+    link: "mailto:aaqilmutaqim16@gmail.com",
   },
   {
     icon: MapPin,
@@ -51,26 +46,44 @@ const contactInfo = [
   },
 ];
 
+// --- Komponen Utama ---
 export default function ContactPage() {
   const initialResult = { success: null, message: null };
-  // Menggunakan useActionState
-  const [state, formAction] = useActionState(sendContactEmail, initialResult);
 
-  const [key, setKey] = useState(0);
+  // Menggantikan useActionState
+  const [state, setState] = useState(initialResult);
+  const [pending, setPending] = useState(false); // Status loading baru
+  const [key, setKey] = useState(0); // Key untuk menetapkan semula borang
 
-  // Logic untuk reset borang selepas berjaya dihantar
-  if (state.success === true && key === 0) {
-    // Reset borang dengan mengubah key
-    setKey((prevKey) => prevKey + 1);
-    // Set semula status mesej selepas 5 saat
-    setTimeout(() => {
-      // Pembetulan: Balut panggilan formAction dalam startTransition
-      startTransition(() => {
-        formAction(initialResult);
-        setKey(0); // Reset key kembali untuk membolehkan penghantaran seterusnya
-      });
-    }, 5000);
-  }
+  // Pengendali Penghantaran Borang (Menggantikan action={formAction})
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setPending(true);
+    setState(initialResult);
+
+    const formData = new FormData(event.target);
+    // Panggil fungsi action yang diimport
+    const result = await sendContactEmail(formData);
+
+    setState(result);
+    setPending(false);
+
+    if (result.success) {
+      // Tetapkan semula borang dengan menukar key
+      setKey((prevKey) => prevKey + 1);
+    }
+  };
+
+  // Logic untuk mengosongkan mesej status selepas 5 saat
+  useEffect(() => {
+    if (state.success !== null) {
+      const timer = setTimeout(() => {
+        setState(initialResult);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [state.success]);
 
   return (
     <div className="min-h-screen bg-white text-gray-900 pt-32 pb-20 px-4 md:px-8">
@@ -133,8 +146,8 @@ export default function ContactPage() {
               Send a Message
             </h2>
 
-            {/* Borang dengan key={key} untuk reset borang */}
-            <form key={key} action={formAction} className="space-y-6">
+            {/* Borang kini menggunakan onSubmit={handleSubmit} */}
+            <form key={key} onSubmit={handleSubmit} className="space-y-6">
               {/* Input Nama Penuh */}
               <div>
                 <label
@@ -219,8 +232,8 @@ export default function ContactPage() {
                 </div>
               )}
 
-              {/* Butang Hantar */}
-              <SubmitButton />
+              {/* Butang Hantar - Luluskan state pending yang baru */}
+              <SubmitButton pending={pending} />
             </form>
           </motion.div>
         </div>
