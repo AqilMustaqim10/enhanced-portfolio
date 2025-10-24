@@ -16,44 +16,31 @@ import {
 // --- Data Placeholder Projek ---
 const projects = [
   {
-    title: "E-Commerce Mockup Platform (React)",
+    title: "StocktakeEase-POS",
     description:
-      "Satu aplikasi e-dagang penuh yang dibina dengan React dan Next.js. Menampilkan pengurusan keadaan (state management) yang kompleks, cart, dan sistem ulasan berperingkat.",
-    techStack: ["React", "Next.js", "Tailwind CSS", "MongoDB"],
-    imageUrl: "https://placehold.co/600x400/1e293b/ffffff?text=E-Commerce",
+      "A web-based Point of Sale and inventory management system developed using HTML, CSS, JavaScript, PHP, and MySQL",
+    techStack: ["HTML", "CSS", "Javascript", "MySQL", "PHP"],
+    imageUrl: "/images/soon.jpg",
     liveLink: "#",
-    githubLink: "#",
-    icon: Code,
+    githubLink: "https://github.com/AqilMustaqim10/StocktakeEase-POS.git",
   },
   {
-    title: "Sistem Pengujian Kualiti (QA Tool)",
+    title: "Todo App",
     description:
-      "Aplikasi ujian akhir-ke-akhir (end-to-end) berasaskan web untuk mengotomasi kes ujian (test cases) bagi mengurangkan ralat pengekodan sebelum *deployment*.",
-    techStack: ["Cypress", "Node.js", "Jest", "Report Portal"],
-    imageUrl: "https://placehold.co/600x400/334155/ffffff?text=QA+Automation",
-    liveLink: "#",
-    githubLink: "#",
-    icon: TestTube,
+      "A full-stack todo application built with React and Vite, featuring Supabase PostgreSQL backend with row-level security, Google OAuth and email authentication, real-time data synchronization, optimistic UI updates, and deployed on Vercel with automated CI/CD.",
+    techStack: ["React", "CSS", "PostgreSQL"],
+    imageUrl: "/images/soon.jpg",
+    liveLink: "https://todo-app-mu-gold.vercel.app/",
+    githubLink: "https://github.com/AqilMustaqim10/todo-app.git",
   },
   {
-    title: "Papan Pemuka Analisis Perniagaan (BA Dashboard)",
+    title: "Fitness Diet App",
     description:
-      "Papan pemuka interaktif yang memvisualkan metrik jualan dan tren pasaran. Dibina untuk menyokong proses membuat keputusan bagi pihak pengurusan perniagaan.",
-    techStack: ["Python (Pandas)", "Chart.js", "Express", "PostgreSQL"],
-    imageUrl: "https://placehold.co/600x400/475569/ffffff?text=BI+Dashboard",
-    liveLink: "#",
-    githubLink: "#",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Kalkulator Pinjaman Peribadi (Vanilla JS)",
-    description:
-      "Satu alat kewangan yang ringkas dan cekap. Menunjukkan kemahiran dalam logik JavaScript tulen (Vanilla JS) dan reka bentuk UI yang berfokus pada kemudahan pengguna.",
-    techStack: ["HTML5", "CSS3", "JavaScript"],
-    imageUrl: "https://placehold.co/600x400/64748b/ffffff?text=JS+Calculator",
-    liveLink: "#",
-    githubLink: "#",
-    icon: Settings,
+      "A beautiful, installable web app for tracking calories, workouts, and weight. Built with React, Vite, and Supabase. Features real-time data sync, offline support, and a modern pink-themed UI with smooth animations. Fully responsive and PWA-enabled for native app-like experience.",
+    techStack: ["React", "Vite", "Supabase", "PWA"],
+    imageUrl: "/images/soon.jpg",
+    liveLink: "https://fitness-diet-app-sigma.vercel.app/",
+    githubLink: "https://github.com/AqilMustaqim10/fitness-diet-app.git",
   },
 ];
 
@@ -93,9 +80,6 @@ const ProjectCard = ({ project, index }) => {
                 "https://placehold.co/600x400/1e293b/ffffff?text=PROJECT+VISUAL";
             }}
           />
-          <div className="absolute top-4 left-4 p-2 rounded-full bg-indigo-600/90 text-white shadow-lg">
-            <project.icon size={24} />
-          </div>
         </div>
 
         {/* Kandungan Kad */}
@@ -127,7 +111,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white font-semibold text-sm rounded-full shadow-md shadow-indigo-500/30 hover:bg-indigo-700 transition-colors"
             >
               <ExternalLink size={18} />
-              Lihat Live
+              Live
             </a>
             <a
               href={project.githubLink}
@@ -136,7 +120,7 @@ const ProjectCard = ({ project, index }) => {
               className="flex items-center gap-2 px-4 py-2 bg-gray-800 text-white font-semibold text-sm rounded-full shadow-md hover:bg-gray-700 transition-colors"
             >
               <Github size={18} />
-              Kod Sumber
+              Source Code
             </a>
           </div>
         </div>
@@ -158,18 +142,14 @@ export default function ProjectPage() {
         {/* --- Bahagian Header Projek --- */}
         <ScrollFadeIn delay={0.1} yOffset={40}>
           <header className="text-center space-y-4">
-            <p className="text-lg uppercase tracking-[0.3em] text-indigo-600 font-medium">
-              Bukti Kemahiran
+            <p className="text-lg uppercase tracking-[0.3em] text-gray-500 font-medium">
+              Proof of Competence
             </p>
             <h1 className="text-7xl md:text-8xl font-extrabold leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                Projek Pilihan Saya
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-500 to-black">
+                My Projects
               </span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto pt-2">
-              Koleksi kerja yang mempamerkan keupayaan saya dalam pembangunan
-              perisian, analisis perniagaan, dan jaminan kualiti.
-            </p>
           </header>
         </ScrollFadeIn>
 
@@ -185,14 +165,14 @@ export default function ProjectPage() {
         <ScrollFadeIn delay={0.5}>
           <div className="text-center p-12 bg-indigo-50 rounded-2xl border-2 border-dashed border-indigo-200 mt-20">
             <h3 className="text-3xl font-bold text-gray-800 mb-3">
-              Mencari Lebih Banyak?
+              Looking for More ?
             </h3>
             <p className="text-lg text-gray-600 mb-6">
-              Jika anda berminat dengan skop kerja penuh saya, sila layari
-              repositori GitHub saya.
+              JIf you are interested in the full scope of my work, please visit
+              my GitHub repository.
             </p>
             <motion.a
-              href="#" // Ganti dengan pautan Github sebenar anda
+              href="https://github.com/AqilMustaqim10" // Ganti dengan pautan Github sebenar anda
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3 bg-purple-600 text-white font-semibold rounded-full shadow-lg shadow-purple-500/40 hover:bg-purple-700 transition-colors"
@@ -202,7 +182,7 @@ export default function ProjectPage() {
               }}
             >
               <Github size={20} />
-              Lihat Semua Projek di GitHub
+              View All Projects on GitHub
             </motion.a>
           </div>
         </ScrollFadeIn>

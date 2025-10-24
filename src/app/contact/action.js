@@ -63,7 +63,7 @@ export async function sendContactEmail(arg1, arg2) {
 
     return {
       success: false,
-      message: `Ralat Pengesahan: ${errorMessages.join(", ")}`,
+      message: `Confirmation Error: ${errorMessages.join(", ")}`,
     };
   }
 
@@ -101,7 +101,7 @@ export async function sendContactEmail(arg1, arg2) {
       console.error("Resend API Error:", data.error);
       return {
         success: false,
-        message: `Ralat Penghantaran E-mel: ${data.error.message || "Sila semak konsol server untuk butiran."}`,
+        message: `Email Delivery Error: ${data.error.message || "Please check the server console for details."}`,
       };
     }
 
@@ -109,14 +109,14 @@ export async function sendContactEmail(arg1, arg2) {
     return {
       success: true,
       message:
-        "Mesej anda telah berjaya dihantar! Saya akan membalas secepat mungkin.",
+        "Your message has been successfully sent! I will reply as soon as possible.",
     };
   } catch (error) {
     console.error("Server Action Catch Error:", error);
     return {
       success: false,
       message:
-        "Ralat Server Tidak Dijangka. Sila cuba sebentar lagi atau semak konsol server.",
+        "Unexpected Server Error. Please try again later or check the server console.",
     };
   }
 }

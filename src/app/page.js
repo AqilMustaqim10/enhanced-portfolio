@@ -21,7 +21,7 @@ const featuredProjects = [
     title: "StocktakeEase-POS",
     description:
       "A web-based Point of Sale and inventory management system developed using HTML, CSS, JavaScript, PHP, and MySQL",
-    image: "/images/project1.jpg",
+    image: "/images/soon.jpg",
     link: "/projects/ecommerce",
   },
   {
@@ -32,10 +32,10 @@ const featuredProjects = [
     link: "/projects/social-dashboard",
   },
   {
-    title: "Portfolio Website",
+    title: "Fitness Diet App",
     description:
-      "My own personal portfolio, designed with Next.js and Tailwind.",
-    image: "/images/project3.jpg",
+      "A Progressive Web App (PWA) fitness tracker built with React, Vite, and Supabase",
+    image: "/images/soon.jpg",
     link: "/projects/my-portfolio",
   },
 ];
@@ -117,9 +117,14 @@ export default function Home() {
             className="text-2xl font-normal text-gray-600 mb-6 block"
           />
 
-          <p className="text-lg font-light mb-10 text-gray-600 max-w-lg">
-            A passionate web developer creating modern and highly responsive web
-            experiences. Driven by design and functionality.
+          <p className="text-lg font-light mb-10 text-gray-600 max-w-lg text-justify">
+            As a final-year Business Computing student, my goal is to ensure
+            technological solutions not only function well but also drive
+            business value. I am building a strong foundation in Full-Stack
+            Development principles, backed by a keen focus on Software Quality
+            Assurance and translating complex needs through Business Analysis. I
+            am actively seeking roles that allow me to combine analytical
+            thinking with creative digital execution.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -133,7 +138,7 @@ export default function Home() {
               See My Projects
             </motion.a>
             <motion.a
-              href="/path-to-your-resume.pdf"
+              href="/Resume_Abdul Aqil Mustaqim Bin Abdul Aziz.pdf"
               target="_blank"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}

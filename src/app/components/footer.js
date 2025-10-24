@@ -4,18 +4,13 @@ import { Twitter, Linkedin, Github, Code } from "lucide-react";
 export default function Footer() {
   const socialLinks = [
     {
-      icon: Twitter,
-      href: "https://twitter.com/[your-handle]",
-      label: "Twitter",
-    },
-    {
       icon: Linkedin,
-      href: "https://linkedin.com/in/[your-profile]",
+      href: "https://linkedin.com/in/aqilmustaqim",
       label: "LinkedIn",
     },
     {
       icon: Github,
-      href: "https://github.com/[your-username]",
+      href: "https://github.com/AqilMustaqim10",
       label: "GitHub",
     },
   ];
@@ -67,7 +62,7 @@ export default function Footer() {
         {/* Bahagian Bawah: Copyright */}
         <div className="text-center pt-6">
           <p className="text-xs text-gray-600">
-            &copy; 2024 Aqil Mustaqim. All rights reserved. Built with Next.js &
+            &copy; 2025 Aqil Mustaqim. All rights reserved. Built with Next.js &
             Tailwind CSS.
           </p>
         </div>

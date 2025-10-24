@@ -177,7 +177,7 @@ export default function AboutPage() {
                   <span>Based in {personalBio.location}</span>
                 </div>
                 <motion.a
-                  href="#contact"
+                  href="/projects"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 transition-colors mt-4"
                   whileHover={{
                     scale: 1.05,
@@ -185,7 +185,7 @@ export default function AboutPage() {
                   }}
                 >
                   <Briefcase size={20} />
-                  Lihat Portfolio Saya
+                  See My Projects
                 </motion.a>
                 {/* END EDIT */}
               </div>
