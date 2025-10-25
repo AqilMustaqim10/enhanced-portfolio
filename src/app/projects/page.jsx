@@ -168,7 +168,7 @@ export default function ProjectPage() {
               Looking for More ?
             </h3>
             <p className="text-lg text-gray-600 mb-6">
-              JIf you are interested in the full scope of my work, please visit
+              If you are interested in the full scope of my work, please visit
               my GitHub repository.
             </p>
             <motion.a
