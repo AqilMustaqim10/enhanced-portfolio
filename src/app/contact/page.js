@@ -35,8 +35,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    value: "aaqilmutaqim16@gmail.com",
-    link: "mailto:aaqilmutaqim16@gmail.com",
+    value: "aaqilmustaqim16@gmail.com",
+    link: "mailto:aaqilmustaqim16@gmail.com",
   },
   {
     icon: MapPin,

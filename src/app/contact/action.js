@@ -8,10 +8,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Skema Zod untuk memastikan data yang diterima sah
 const ContactSchema = z.object({
-  name: z.string().min(1, "Sila masukkan nama penuh anda."),
-  email: z.string().email("Sila masukkan alamat e-mel yang sah."),
+  name: z.string().min(1, "Please enter your full name."),
+  email: z.string().email("Please enter a valid email address"),
   subject: z.string().optional(),
-  message: z.string().min(5, "Mesej mestilah sekurang-kurangnya 5 aksara."),
+  message: z
+    .string()
+    .min(5, "The message must be at least 5 characters long.s"),
 });
 
 /**
@@ -87,12 +89,12 @@ export async function sendContactEmail(arg1, arg2) {
       reply_to: email, // Membalas kepada pengirim borang
       subject: `[Portfolio Contact] ${subject} from ${name}`,
       html: `
-        <h1>Mesej Baru dari Borang Kontak</h1>
+        <h1>New Message from Contact Form</h1>
         <p><strong>Nama:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subjek:</strong> ${subject}</p>
         <hr>
-        <p><strong>Mesej:</strong></p>
+        <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,
     });
