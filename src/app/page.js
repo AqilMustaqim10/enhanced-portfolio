@@ -70,6 +70,7 @@ const TypeAnimationComponent = ({ sequence, speed, className }) => {
   );
 };
 
+
 // Data kemahiran anda (boleh ubah atau tambah)
 const skills = [
   { name: "HTML", level: "Advanced", icon: "/icons/html.png" },
@@ -83,11 +84,12 @@ const skills = [
 // Data projek contoh (anda perlu ganti dengan projek anda)
 const featuredProjects = [
   {
-    title: "StocktakeEase-POS",
+    title: "Job Tracking Apps",
     description:
-      "A web-based Point of Sale and inventory management system developed using HTML, CSS, JavaScript, PHP, and MySQL",
-    image: "/images/soon.jpg",
-    link: "/projects/ecommerce",
+      "A full-stack job application tracking web app built with React, Supabase, and TanStack Query — featuring kanban boards, drag and drop, file attachments, and real-time filtering.",
+    image: "/images/projects1.png",
+    // link replaced with live Vercel URL
+    link: "https://job-tracker-gold-nine.vercel.app/",
   },
   {
     title: "Todo App",
@@ -193,13 +195,10 @@ export default function Home() {
           />
 
           <p className="text-lg font-light mb-10 text-gray-600 max-w-lg text-justify">
-            As a final-year Business Computing student, my goal is to ensure
-            technological solutions not only function well but also drive
-            business value. I am building a strong foundation in Full-Stack
-            Development principles, backed by a keen focus on Software Quality
-            Assurance and translating complex needs through Business Analysis. I
-            am actively seeking roles that allow me to combine analytical
-            thinking with creative digital execution.
+            Fresh graduate in Information Technology (Business Computing) with hands-on experience in
+            manual software testing and basic web development. Skilled in HTML, CSS, JavaScript, PHP,
+            and SQL fundamentals, with exposure to test case preparation, bug reporting, and system
+            validation. Detail-oriented and quick to adapt to new technologies and workflows
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -288,44 +287,50 @@ export default function Home() {
           A selection of my best work.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, index) => (
-            <motion.a
-              key={index}
-              href={project.link}
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              whileHover={{ y: -5, scale: 1.02 }} // Efek hover yang lebih halus
-              className="group relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-200 block"
-            >
-              <div className="aspect-video relative overflow-hidden">
-                {/* Menggantikan Next/Image dengan <img> standard */}
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  // Menggunakan gaya CSS untuk mencapai kesan 'layout="fill"' dan 'objectFit="cover"'
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  className="transition-transform duration-500 group-hover:scale-110"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = getFallbackImage("600x400", project.title);
-                  }}
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-1 text-gray-900">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  {project.description}
-                </p>
-                <span className="flex items-center text-sm font-medium text-gray-700 group-hover:text-black transition-colors">
-                  View Projects <ArrowRight size={16} className="ml-2" />
-                </span>
-              </div>
-            </motion.a>
-          ))}
+          {featuredProjects.map((project, index) => {
+            // check if project.link is external
+            const isExternal = project.link.startsWith("http");
+            return (
+              <motion.a
+                key={index}
+                href={project.link}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true, amount: 0.4 }}
+                whileHover={{ y: -5, scale: 1.02 }} // Efek hover yang lebih halus
+                className="group relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-200 block"
+              >
+                <div className="aspect-video relative overflow-hidden">
+                  {/* Menggantikan Next/Image dengan <img> standard */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    // Menggunakan gaya CSS untuk mencapai kesan 'layout="fill"' dan 'objectFit="cover"'
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    className="transition-transform duration-500 group-hover:scale-110"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = getFallbackImage("600x400", project.title);
+                    }}
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-1 text-gray-900">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 mb-4">
+                    {project.description}
+                  </p>
+                  <span className="flex items-center text-sm font-medium text-gray-700 group-hover:text-black transition-colors">
+                    View Projects <ArrowRight size={16} className="ml-2" />
+                  </span>
+                </div>
+              </motion.a>
+            );
+          })}
         </div>
       </section>
     </div>

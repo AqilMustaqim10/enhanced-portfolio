@@ -16,13 +16,13 @@ import {
 // --- Data Placeholder Projek ---
 const projects = [
   {
-    title: "StocktakeEase-POS",
+    title: "Job Tracking Apps",
     description:
-      "A web-based Point of Sale and inventory management system developed using HTML, CSS, JavaScript, PHP, and MySQL",
-    techStack: ["HTML", "CSS", "Javascript", "MySQL", "PHP"],
-    imageUrl: "/images/soon.jpg",
-    liveLink: "#",
-    githubLink: "https://github.com/AqilMustaqim10/StocktakeEase-POS.git",
+      "A full-stack job application tracking web app built with React, Supabase, and TanStack Query — featuring kanban boards, drag and drop, file attachments, and real-time filtering.",
+    techStack: ["React", "Supabase", "TanStack Query"],
+    imageUrl: "/images/projects1.png",
+    liveLink: "https://job-tracker-gold-nine.vercel.app/",
+    githubLink: "https://github.com/AqilMustaqim10/job-tracker",
   },
   {
     title: "Todo App",
