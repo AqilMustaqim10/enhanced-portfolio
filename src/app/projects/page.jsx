@@ -13,7 +13,7 @@ import {
   Settings,
 } from "lucide-react";
 
-// --- Data Placeholder Projek ---
+// --- Data Placeholder Project ---
 const projects = [
   {
     title: "Job Tracking Apps",
@@ -29,18 +29,18 @@ const projects = [
     description:
       "A full-stack todo application built with React and Vite, featuring Supabase PostgreSQL backend with row-level security, Google OAuth and email authentication, real-time data synchronization, optimistic UI updates, and deployed on Vercel with automated CI/CD.",
     techStack: ["React", "CSS", "PostgreSQL"],
-    imageUrl: "/images/soon.jpg",
+    imageUrl: "/images/todo.png",
     liveLink: "https://todo-app-mu-gold.vercel.app/",
-    githubLink: "https://github.com/AqilMustaqim10/todo-app.git",
+    githubLink: "https://github.com/AqilMustaqim10/todo-app",
   },
   {
-    title: "Fitness Diet App",
+    title: "MERN POS SYSTEM",
     description:
-      "A beautiful, installable web app for tracking calories, workouts, and weight. Built with React, Vite, and Supabase. Features real-time data sync, offline support, and a modern pink-themed UI with smooth animations. Fully responsive and PWA-enabled for native app-like experience.",
-    techStack: ["React", "Vite", "Supabase", "PWA"],
-    imageUrl: "/images/soon.jpg",
-    liveLink: "https://fitness-diet-app-sigma.vercel.app/",
-    githubLink: "https://github.com/AqilMustaqim10/fitness-diet-app.git",
+      "A full-stack Point of Sale system built with the MERN stack. Designed for F&B businesses with role-based access, product & category management with image uploads, a full POS screen with cart, compound tax calculation, dual receipt printing (customer + kitchen ticket), sales analytics dashboard with charts, user management, and store settings. Deployed on Railway + Vercel.",
+    techStack: ["React", "Vite", "Node.js", "Express.js", "MongoDB"],
+    imageUrl: "/images/projects3.png",
+    liveLink: "https://mern-pos-phi.vercel.app/login",
+    githubLink: "https://github.com/AqilMustaqim10/mern-pos",
   },
 ];
 

@@ -70,7 +70,6 @@ const TypeAnimationComponent = ({ sequence, speed, className }) => {
   );
 };
 
-
 // Data kemahiran anda (boleh ubah atau tambah)
 const skills = [
   { name: "HTML", level: "Advanced", icon: "/icons/html.png" },
@@ -88,7 +87,6 @@ const featuredProjects = [
     description:
       "A full-stack job application tracking web app built with React, Supabase, and TanStack Query — featuring kanban boards, drag and drop, file attachments, and real-time filtering.",
     image: "/images/projects1.png",
-    // link replaced with live Vercel URL
     link: "https://job-tracker-gold-nine.vercel.app/",
   },
   {
@@ -96,14 +94,14 @@ const featuredProjects = [
     description:
       "A full-stack todo app with React, Supabase PostgreSQL, Google OAuth authentication and real-time synchronization",
     image: "/images/todo.png",
-    link: "/projects/social-dashboard",
+    link: "https://todo-app-mu-gold.vercel.app/",
   },
   {
-    title: "Fitness Diet App",
+    title: "MERN POS System",
     description:
-      "A Progressive Web App (PWA) fitness tracker built with React, Vite, and Supabase",
-    image: "/images/soon.jpg",
-    link: "/projects/my-portfolio",
+      "A full-stack Point of Sale system built with the MERN stack. Designed for F&B businesses with role-based access, product & category management with image uploads, a full POS screen with cart, compound tax calculation, dual receipt printing (customer + kitchen ticket), sales analytics dashboard with charts, user management, and store settings. Deployed on Railway + Vercel.",
+    image: "/images/projects3.png",
+    link: "https://mern-pos-phi.vercel.app/login",
   },
 ];
 
@@ -195,10 +193,12 @@ export default function Home() {
           />
 
           <p className="text-lg font-light mb-10 text-gray-600 max-w-lg text-justify">
-            Fresh graduate in Information Technology (Business Computing) with hands-on experience in
-            manual software testing and basic web development. Skilled in HTML, CSS, JavaScript, PHP,
-            and SQL fundamentals, with exposure to test case preparation, bug reporting, and system
-            validation. Detail-oriented and quick to adapt to new technologies and workflows
+            Fresh graduate in Information Technology (Business Computing) with
+            hands-on experience in manual software testing and basic web
+            development. Skilled in HTML, CSS, JavaScript, PHP, and SQL
+            fundamentals, with exposure to test case preparation, bug reporting,
+            and system validation. Detail-oriented and quick to adapt to new
+            technologies and workflows
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
@@ -309,7 +309,11 @@ export default function Home() {
                     src={project.image}
                     alt={project.title}
                     // Menggunakan gaya CSS untuk mencapai kesan 'layout="fill"' dan 'objectFit="cover"'
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
                     className="transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
                       e.target.onerror = null;
