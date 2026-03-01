@@ -42,6 +42,15 @@ const projects = [
     liveLink: "https://mern-pos-phi.vercel.app/login",
     githubLink: "https://github.com/AqilMustaqim10/mern-pos",
   },
+  {
+    title: "EXPENSE SPLITTER",
+    description:
+      "A production-ready expense splitting app for groups. Features JWT auth, real-time balance tracking, a greedy debt-settlement algorithm, and a full payment confirmation workflow.",
+    techStack: ["Full Stack", "React", "Vite", "Node.js", "MongoDB"],
+    imageUrl: "/images/projects4.png",
+    liveLink: "https://expense-splitter-beta-one.vercel.app",
+    githubLink: "https://github.com/AqilMustaqim10/expense-splitter",
+  },
 ];
 
 // --- Komponen Pembantu untuk Animasi Gulir (Scroll Animation) ---
