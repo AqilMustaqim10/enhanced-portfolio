@@ -3,8 +3,9 @@
 import { Resend } from "resend";
 import { z } from "zod";
 
-// Menggunakan kunci API dari .env. Pastikan server telah direstart selepas menetapkan kunci.
-const resend = new Resend(process.env.RESEND_API_KEY);
+// NOTE: create the Resend client inside the action so we can catch initialization
+// errors (e.g. missing API key causing the constructor to throw).
+// Pastikan server telah direstart selepas menetapkan kunci.
 
 // Skema Zod untuk memastikan data yang diterima sah
 const ContactSchema = z.object({
@@ -23,6 +24,19 @@ const ContactSchema = z.object({
  */
 // Menerima dua argumen generik (arg1, arg2) untuk pertahanan terhadap konflik susunan.
 export async function sendContactEmail(arg1, arg2) {
+  // create or validate Resend client inside try/catch
+  let resend;
+  try {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  } catch (initError) {
+    console.error("Resend initialization error:", initError);
+    return {
+      success: false,
+      message:
+        "Server configuration error. Please contact the site administrator.",
+    };
+  }
+
   // 1. Kenal pasti Objek FormData
   // FormData adalah objek yang mempunyai method .get(). Kita cari argumen yang memilikinya.
   const isArg1FormData = arg1 && typeof arg1.get === "function";
@@ -35,7 +49,7 @@ export async function sendContactEmail(arg1, arg2) {
     // dari client (page.js -> setTimeout). Daripada mengembalikan ralat kritikal,
     // kita mengembalikan state neutral (initial state) untuk menetapkan semula UI secara senyap.
     console.log(
-      "[LOG DARI SERVER] Gagal mengenal pasti FormData. Menganggap sebagai cubaan reset state. Mengembalikan state neutral."
+      "[LOG DARI SERVER] Gagal mengenal pasti FormData. Menganggap sebagai cubaan reset state. Mengembalikan state neutral.",
     );
     return {
       success: null, // Reset state kembali ke neutral
@@ -60,7 +74,7 @@ export async function sendContactEmail(arg1, arg2) {
   if (!parsedData.success) {
     const errorsArray = parsedData.error.errors || [];
     const errorMessages = errorsArray.map(
-      (err) => `${err.path[0]}: ${err.message}`
+      (err) => `${err.path[0]}: ${err.message}`,
     );
 
     return {
@@ -72,7 +86,7 @@ export async function sendContactEmail(arg1, arg2) {
   // 3. Semak Kunci API
   if (!process.env.RESEND_API_KEY || process.env.RESEND_API_KEY.length < 5) {
     console.error(
-      "[LOG DARI SERVER] RESEND_API_KEY: Undefined/Missing! Please check .env file and restart server."
+      "[LOG DARI SERVER] RESEND_API_KEY: Undefined/Missing! Please check .env file and restart server.",
     );
     return {
       success: false,

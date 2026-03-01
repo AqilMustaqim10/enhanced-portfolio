@@ -62,15 +62,26 @@ export default function ContactPage() {
     setState(initialResult);
 
     const formData = new FormData(event.target);
-    // Panggil fungsi action yang diimport
-    const result = await sendContactEmail(formData);
 
-    setState(result);
-    setPending(false);
+    try {
+      // Panggil fungsi action yang diimport
+      const result = await sendContactEmail(formData);
 
-    if (result.success) {
-      // Tetapkan semula borang dengan menukar key
-      setKey((prevKey) => prevKey + 1);
+      setState(result);
+      if (result.success) {
+        // Tetapkan semula borang dengan menukar key
+        setKey((prevKey) => prevKey + 1);
+      }
+    } catch (error) {
+      // Tangkap sebarang ralat yang tidak dijangka untuk memastikan spinner tidak tersekat.
+      console.error("Error sending contact email:", error);
+      setState({
+        success: false,
+        message: "Something went wrong. Please try again later.",
+      });
+    } finally {
+      // Pastikan pending dimatikan tidak kira apa pun
+      setPending(false);
     }
   };
 
